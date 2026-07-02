@@ -20,14 +20,14 @@ btu.bose.com (although this one is not required, it is still interesting to see 
 Below steps are different from jbruneaux31's quick fix (due to the reason that my earbuds are downgraded already, I can't make the complate screenshots , some of which are only available when earbuds are 2.0.7)
 
 2. we enable charles endpoints first, menu-proxy-enable breakpoints(Ctrl+K)
-![2_enable_breakpoints](https://github.com/nasmatic/-202606-bose_earbuds_firmware/blob/main/2_enable_breakpoints.png)
+![2_enable_breakpoints](https://github.com/nasmatic/bose_qc_earbuds_downgrade_1.0.7/blob/main/2_enable_breakpoints.png)
 
 
 3. In Charles-proxy-breakpoints settings, add one rule, leave Method empty(I guess setting it to GET also works),Protocol: https, Host:updates-framingham-prod.smartproducts.bose.io,Port:443,Path:/update,Query:*(wildcard), then click done. When bose updater requests updates-framingham-prod.smartproducts.bose.io, it will be intecepted.
-![3_breakpoints_setting](https://github.com/nasmatic/-202606-bose_earbuds_firmware/blob/main/3_breakpoints_setting.png)
+![3_breakpoints_setting](https://github.com/nasmatic/bose_qc_earbuds_downgrade_1.0.7/blob/main/3_breakpoints_setting.png)
 
 4. Goto btu.bose.com and let is go up to the point where it says that the firmware is already up-to-date.If you haven't installed the Bose updater, then download and install and run. This software is like a background process briging your earbuds and web based interface.
-![4_request_modifying](https://github.com/nasmatic/-202606-bose_earbuds_firmware/blob/main/4_request_modifying.png)
+![4_request_modifying](https://github.com/nasmatic/bose_qc_earbuds_downgrade_1.0.7/blob/main/4_request_modifying.png)
 
 5. If everything is ok, when web interface changes serveral times, in charles, there will another tab called breakpoints. In this tab, request is intecepted and is waiting for user's action. We change productType to lando(which is QC earbuds's alias), and we change firmwareVersion from 2.0.7 to 1.0.7-9846+620b71c. Finally we click execute.By doing this, we tell bose updater this earbuds has a 1.0.7 firmware and needs update.
 6. Next, still in Charles, another breakpoints is waiting for user's action. This time we need to edit the reponse. Orignial response should be like this:
@@ -50,7 +50,7 @@ This is Bose's offical firmware download endpoint. Here, we replace baseUrl to y
 7. If everything works ok, you should see the green update button on webpage. Click and wait for process. 
 
 8. Error will happen in the end of the updating. Ignore it and unplug the earbuds cable. Re-pairing it to your phone and check Bose app if the firmware has been downgraded to 1.0.7. For me, after downgrading, the interface of Bose app also changes, where you can swipe to feel different NC levels.
-![8_after_downgrading_1](https://github.com/nasmatic/-202606-bose_earbuds_firmware/blob/main/8_after_downgrading_1.png)
-![8_after_downgrading_2](https://github.com/nasmatic/-202606-bose_earbuds_firmware/blob/main/8_after_downgrading_2.png)
+![8_after_downgrading_1](https://github.com/nasmatic/bose_qc_earbuds_downgrade_1.0.7/blob/main/8_after_downgrading_1.png)
+![8_after_downgrading_2](https://github.com/nasmatic/bose_qc_earbuds_downgrade_1.0.7/blob/main/8_after_downgrading_2.png)
 
 Also a chinsese tieba thread for reference:https://tieba.baidu.com/p/9184928301?fr=undefined
